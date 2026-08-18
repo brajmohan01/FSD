@@ -49,11 +49,16 @@ const removeProduct = async (pid) => {
   }
 };
 
-const updateQuantity = async (pid, qty) => {
+const updateQuantity = async (pid, option='-') => {
   const cart = await getCart();
   const isFoundInCart = cart.find((item) => item.id === pid);
   if (isFoundInCart) {
-    isFoundInCart.qty = qty;
+    if (isFoundInCart.qty == 1){
+      await removeProduct(pid);
+    }else{
+      isFoundInCart.qty -= 1;
+      await saveCart(cart);
+    }
     await saveCart(cart);
     console.log(`Product with id ${pid} updated to quantity ${qty}`);
   } else {
