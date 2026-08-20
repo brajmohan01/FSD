@@ -8,6 +8,7 @@ import http from 'http';
 const server = http.createServer((req, res) => {
     res.write("<h1 style='color: red;'>Welcome to Server Side Programming</h1>");
     res.end();
+    res.write("<h1 style='color: blue;'>Nodemon is tracking changes</h1>");
 });
 
 server.listen(5001, () =>{
